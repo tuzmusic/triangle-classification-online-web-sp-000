@@ -7,22 +7,16 @@ class Triangle
 
   def kind
     if !self.valid?
-      # raise_error
       raise TriangleError
       return
     end
-    return :equilateral if sides[0] == sides[1] && sides[1] == sides[2]
-    return :isosceles if sides[0] == sides[1] || sides[0] == sides[2] || sides[2] == sides[1]
-    return :scalene
-  end
-
-  def raise_error
-    begin
-      raise TriangleError
-    rescue TriangleError => error
-      puts error.message
+    case sides.uniq.length
+    when 1; :equilateral
+    when 2; :isosceles
+    when 3; :scalene
     end
   end
+
 
   def valid?
     # The sum of the lengths of any two sides of a triangle always exceeds the length of the third side.
